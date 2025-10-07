@@ -1,0 +1,17 @@
+#!/bin/bash
+
+logfile=/tmp/parede.log
+sessao=$(echo $XDG_SESSION_TYPE)
+papel=$(find ~/Pictures/wal/ -type f | shuf | head -n 1)
+if [ $sessao == wayland ]; then
+	hyprctl hyprpaper reload , $papel
+	echo 'HYPRPAPER SET' > $logfile
+else
+	xwallpaper --zoom $papel
+	xdotool key Super+F5
+	echo 'XWALLPAPER SET' > $logfile
+fi
+
+wal -eni $papel
+xrdb -merge ~/.Xresources
+cat ~/.cache/wal/dwm.Xresources > ~/.Xresources
