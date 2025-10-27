@@ -5,6 +5,6 @@ while true; do
 	freeram=$(free -gh | awk 'NR == 2 {print $3 "/" $2}')
 	ip4lcl=$(iwctl station wlan0 show | grep -e 'Connected network' -e 'IPv4 address' | awk 'NR==1 {a=$3} NR==2 {print a, $3}' || echo NO-INFO)
 	cputemp=$(($(cat /sys/class/hwmon/hwmon1/temp1_input) / 1000))°C
-	xsetroot -name " $cputemp $freeram | $ip4lcl | $date"
+	xsetroot -name ""
 	sleep 2
 done
